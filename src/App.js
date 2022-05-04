@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import GoblinForm from './GoblinForm';
 import GoblinList from './GoblinList';
@@ -12,6 +13,21 @@ function App() {
       goblinFormHP, which is how we track the user input for the current HP of the goblin in the form
       goblinFormColor, which is how we track the user input for the current color of the goblin in the form
 */
+
+  // track allGoblins, an array of all goblins
+  const [allGoblins, setAllGoblins] = useState([]);
+
+  // filteredGoblins, a second array of goblins: this one is the filtered version of the above allGoblins array
+  const [filteredGoblins, setAllFilteredGoblins] = useState(null);
+
+  // goblinFormName, which is how we track the user input for the current name of the goblin in the form
+  const [goblinFormName, setGoblinFormName] = useState('');
+
+  // goblinFormHP, which is how we track the user input for the current HP of the goblin in the form
+  const [goblinFormHP, setGoblinFormHP] = useState('');
+
+  //goblinFormColor, which is how we track the user input for the current color of the goblin in the form
+  const [goblinFormColor, setGoblinFormColor] = useState('');
 
   function submitGoblin(e) {
     e.preventDefault();
