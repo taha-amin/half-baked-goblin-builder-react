@@ -1,4 +1,5 @@
 import { useState } from 'react';
+// import { useEffect } from 'react';
 import './App.css';
 import GoblinForm from './GoblinForm';
 import GoblinList from './GoblinList';
@@ -18,7 +19,7 @@ function App() {
   const [allGoblins, setAllGoblins] = useState([]);
 
   // filteredGoblins, a second array of goblins: this one is the filtered version of the above allGoblins array
-  const [filteredGoblins, setAllFilteredGoblins] = useState(null);
+  const [filteredGoblins, setAllFilteredGoblins] = useState(allGoblins);
 
   // goblinFormName, which is how we track the user input for the current name of the goblin in the form
   const [goblinFormName, setGoblinFormName] = useState('');
@@ -56,8 +57,12 @@ function App() {
     allGoblins.splice(goblinIndex, 1);
 
     // update the allGoblins array immutably to this new, smaller array
-    setAllGoblins([...allGoblins]);
+    // setAllGoblins([...allGoblins]);
+    setAllFilteredGoblins([...allGoblins]);
   }
+
+  // // useEffect(()) that watches for all goblins to change and when it does, call handleFilterGoblins
+  // useEffect(() => handleFilterGoblins(filteredGoblins), [filteredGoblins, allGoblins]); // eslint-disable-line
 
   function handleFilterGoblins(search) {
     // use the filter method to get an array of goblins whose name includes this search argument
