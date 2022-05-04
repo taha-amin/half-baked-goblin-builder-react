@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import GoblinForm from './GoblinForm';
 import GoblinList from './GoblinList';
@@ -30,6 +30,11 @@ function App() {
   //goblinFormColor, which is how we track the user input for the current color of the goblin in the form
   const [goblinFormColor, setGoblinFormColor] = useState('lightgreen');
 
+  const [filterQuery, setFilterQuery] = useState('');
+
+  // useEffect(()) that watches for all goblins to change and when it does, call handleFilterGoblins
+  useEffect(() => handleFilterGoblins(filterQuery), [filterQuery]); //eslint-disable-line
+
   function submitGoblin(e) {
     e.preventDefault();
 
@@ -57,12 +62,9 @@ function App() {
     allGoblins.splice(goblinIndex, 1);
 
     // update the allGoblins array immutably to this new, smaller array
-    // setAllGoblins([...allGoblins]);
+    //setAllGoblins([...allGoblins]);
     setAllFilteredGoblins([...allGoblins]);
   }
-
-  // // useEffect(()) that watches for all goblins to change and when it does, call handleFilterGoblins
-  // useEffect(() => handleFilterGoblins(filteredGoblins), [filteredGoblins, allGoblins]); // eslint-disable-line
 
   function handleFilterGoblins(search) {
     // use the filter method to get an array of goblins whose name includes this search argument
@@ -91,7 +93,7 @@ function App() {
       <div className="goblin-filter quarter">
         Filter Goblins
         {/* note that handleFilterGoblins is defined upstairs. This is where the allGoblins array gets filtered */}
-        <input onChange={(e) => handleFilterGoblins(e.target.value)} />
+        <input onChange={(e) => setFilterQuery(e.target.value)} />
       </div>
       <GoblinForm
         /*
@@ -114,7 +116,7 @@ function App() {
         setGoblinFormHP={setGoblinFormHP}
       />
       <GoblinList
-        goblins={filteredGoblins || allGoblins} // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array
+        goblins={filterQuery ? filteredGoblins : allGoblins} // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array
         handleDeleteGoblin={handleDeleteGoblin} // note that the goblin list has access to the ability to delete
       />
     </div>
