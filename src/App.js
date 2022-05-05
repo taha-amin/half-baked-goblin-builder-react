@@ -19,7 +19,7 @@ function App() {
   const [allGoblins, setAllGoblins] = useState([]);
 
   // filteredGoblins, a second array of goblins: this one is the filtered version of the above allGoblins array
-  const [filteredGoblins, setAllFilteredGoblins] = useState(allGoblins);
+  const [filteredGoblins, setAllFilteredGoblins] = useState([]);
 
   // goblinFormName, which is how we track the user input for the current name of the goblin in the form
   const [goblinFormName, setGoblinFormName] = useState('');
